@@ -1,6 +1,6 @@
 # PeerReviewdsClujPubs
 
-A student-centric peer-review web application designed for finding and reviewing locations in Cluj-Napoca (entertainment, education, food).
+A student peer-review web application designed for finding and reviewing locations in Cluj-Napoca (entertainment, education, food).
 
 ## Core Use Cases
 - **Students:** Browse local businesses, read reviews, submit ratings/comments, and vote on other reviews.
