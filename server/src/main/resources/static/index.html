@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1><i class="fa-solid fa-location-dot"></i> Student Review</h1>
+            </div>
+            <div class="header-right">
+                <button id="theme-toggle" class="icon-btn" title="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
+                <div id="auth-status">
+                    <span id="user-display">Not logged in</span>
+                    <button id="my-profile-btn" class="icon-btn" style="display: none;" title="My Profile"><i class="fa-solid fa-user-circle"></i></button>
+                    <button id="logout-btn" class="icon-btn" style="display: none;" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="server-status-section" class="status-bar">
+                <p><i class="fa-solid fa-server"></i> Server Status: <strong id="server-data">Checking...</strong></p>
+            </section>
+
+            <section id="auth-forms" class="landing-section">
+                <div class="hero-content">
+                    <h2>Discover & Review</h2>
+                    <h3>The best student spots in Cluj</h3>
+                    <p>Find the perfect cafe for studying, the wildest club for partying, or the cheapest eats in town. Curated by students, for students.</p>
+                    <button id="guest-access-btn" class="outline-btn large-btn">Continue as Guest <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+
+                <div class="auth-cards-container">
+                    <div class="auth-switcher">
+                        <button id="show-login" class="active">Login</button>
+                        <button id="show-register">Register</button>
+                    </div>
+
+                    <div class="form-container" id="login-container">
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="login-email"><i class="fa-solid fa-envelope"></i> Email</label>
+                                <input type="email" id="login-email" required placeholder="student@university.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+                                <input type="password" id="login-password" required placeholder="••••••••">
+                            </div>
+                            <button type="submit" class="primary-btn block-btn">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                        </form>
+                        <p id="login-message" class="message"></p>
+                    </div>
+
+                    <div class="form-container" id="register-container" style="display: none;">
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label for="reg-username"><i class="fa-solid fa-user"></i> Username</label>
+                                <input type="text" id="reg-username" required placeholder="CoolStudent99">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email</label>
+                                <input type="email" id="reg-email" required placeholder="student@university.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-password"><i class="fa-solid fa-lock"></i> Password</label>
+                                <input type="password" id="reg-password" required placeholder="Create a strong password">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-role"><i class="fa-solid fa-users-gear"></i> Role</label>
+                                <select id="reg-role">
+                                    <option value="STUDENT">Student</option>
+                                    <option value="OWNER">Business Owner</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="business-group" style="display: none;">
+                                <label for="reg-business"><i class="fa-solid fa-briefcase"></i> Business Name</label>
+                                <input type="text" id="reg-business" placeholder="e.g., The Coffee Corner">
+                            </div>
+                            <button type="submit" class="primary-btn block-btn">Register <i class="fa-solid fa-user-plus"></i></button>
+                        </form>
+                        <p id="register-message" class="message"></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dashboard" style="display: none;">
+                <div class="dashboard-header">
+                    <div class="dash-intro">
+                        <h2>Explore Places</h2>
+                        <p class="subtitle">Find your next favorite spot</p>
+                    </div>
+                    
+                    <div id="search-container" class="search-bar-wrapper">
+                        <div class="search-input-group">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" id="search-input" placeholder="Search by name, address...">
+                        </div>
+                        
+                        <div class="filters-group">
+                            <select id="filter-type">
+                                <option value="">All Categories</option>
+                                <option value="CAFE">☕ Cafe</option>
+                                <option value="STUDY_HUB">📚 Study Hub</option>
+                                <option value="CLUB">🎵 Club</option>
+                                <option value="RESTAURANT">🍴 Restaurant</option>
+                                <option value="PUB">🍺 Pub</option>
+                                <option value="OTHER">✨ Other</option>
+                            </select>
+                            <div class="mini-inputs">
+                                <input type="number" id="filter-rating" placeholder="★ 1+" min="1" max="5">
+                                <input type="number" id="filter-reviews" placeholder="Revs 0+" min="0">
+                            </div>
+                            <button id="search-btn" class="icon-btn-primary"><i class="fa-solid fa-filter"></i> Apply</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="owner-controls" style="display: none; margin-bottom: 20px;">
+                    <button id="manage-places-btn" class="secondary-btn btn-orange">Manage My Places</button>
+                </div>
+
+                <div id="admin-controls" style="display: none; margin-bottom: 20px;">
+                    <button id="admin-users-btn" class="secondary-btn btn-red">Manage Users</button>
+                </div>
+
+                <div id="content-area">
+                    <p>You are logged in.</p>
+                </div>
+            </section>
+
+            <!-- User Profile View -->
+            <section id="user-profile-view" style="display: none;">
+                <button id="back-to-dash-profile" class="secondary-btn">← Back to Dashboard</button>
+                <div class="profile-header card">
+                    <div class="profile-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profile-username">Username</h2>
+                        <span id="profile-role" class="badge">STUDENT</span>
+                        <p>Joined: <span id="profile-join-date">Date</span></p>
+                        <div class="profile-stats">
+                            <div class="stat-box">
+                                <strong id="profile-total-reviews">0</strong>
+                                <span>Reviews</span>
+                            </div>
+                            <div class="stat-box">
+                                <strong id="profile-avg-rating">0.0</strong>
+                                <span>Avg Rating</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-reviews-list">
+                    <h3>Recent Reviews</h3>
+                    <div id="profile-reviews-container" class="reviews-section">
+                        <!-- Reviews injected here -->
+                    </div>
+                </div>
+
+                <div id="profile-favorites-section" class="profile-favorites-list" style="margin-top: 2rem;">
+                    <h3>Favorite Places</h3>
+                    <div id="profile-favorites-container" class="places-grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+                        <!-- Favorites injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <section id="my-places-view" style="display: none;">
+                <div class="view-header">
+                    <button id="back-to-dash-owner" class="secondary-btn">← Back</button>
+                    <h2>My Places</h2>
+                    <button id="add-place-btn" class="primary-btn">+ Add New Place</button>
+                </div>
+                <div id="my-places-list" class="places-grid">
+                    <!-- Owner places injected here -->
+                </div>
+            </section>
+
+            <section id="edit-place-view" style="display: none;">
+                <button id="cancel-edit-btn" class="secondary-btn">Cancel</button>
+                <h2 id="edit-view-title">Add New Place</h2>
+                <div class="form-container">
+                    <form id="place-form">
+                        <input type="hidden" id="edit-place-id">
+                        <div class="form-group">
+                            <label for="place-name">Name:</label>
+                            <input type="text" id="place-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="place-desc">Description:</label>
+                            <textarea id="place-desc" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="place-type">Type:</label>
+                            <select id="place-type" required>
+                                <option value="CAFE">Cafe</option>
+                                <option value="STUDY_HUB">Study Hub</option>
+                                <option value="CLUB">Club</option>
+                                <option value="RESTAURANT">Restaurant</option>
+                                <option value="PUB">Pub</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="place-addr">Address:</label>
+                            <input type="text" id="place-addr" required>
+                        </div>
+                        <button type="submit">Save Place</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="admin-users-view" style="display: none;">
+                <button id="back-to-dash-admin" class="secondary-btn">← Back</button>
+                <h2>Manage Users</h2>
+                <div class="users-list-container card">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-list-body">
+                            <!-- Users injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="place-details-view" style="display: none;">
+                <button id="back-to-dash" class="secondary-btn">← Back</button>
+                <div id="place-info" class="details-container card">
+                    <!-- Place info injected here -->
+                </div>
+                
+                <div class="reviews-section card">
+                    <h3>Reviews</h3>
+                    <div id="add-review-container" style="display: none;">
+                        <h4 id="review-form-title">Leave a Review</h4>
+                        <form id="review-form">
+                            <input type="hidden" id="review-place-id">
+                            <input type="hidden" id="review-id-edit">
+                            <div class="form-group">
+                                <label>Rating:</label>
+                                <div class="star-rating">
+                                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5">★</label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4">★</label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3">★</label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2">★</label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1">★</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="review-comment">Comment:</label>
+                                <textarea id="review-comment" rows="3" required></textarea>
+                            </div>
+                            <button type="submit">Submit Review</button>
+                        </form>
+                    </div>
+                    <div id="reviews-list">
+                        <!-- Reviews injected here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Custom Modal -->
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-title">Notification</h3>
+            <p id="modal-message">Message goes here.</p>
+            <div class="modal-actions">
+                <button id="modal-ok-btn" class="primary-btn">OK</button>
+                <button id="modal-cancel-btn" class="secondary-btn" style="display: none;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

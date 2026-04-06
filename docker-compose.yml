@@ -1,0 +1,35 @@
+version: '3.8' # O versiune modernă de compose
+
+services:
+  db: # Numele serviciului
+    image: postgres:15 # Vom folosi imaginea oficială Postgres, versiunea 15
+    container_name: student_review_db # Un nume prietenos pentru container
+    environment:
+      # Setează variabilele de mediu pentru baza de date
+      POSTGRES_USER: user        # Utilizatorul tău
+      POSTGRES_PASSWORD: 1234  # Parola ta (folosește ceva simplu PENTRU DEZVOLTARE)
+      POSTGRES_DB: student_review   # Numele bazei de date care va fi creată
+    ports:
+      # Expune portul 5432 din container pe portul 5432 al mașinii tale (localhost)
+      - "5433:5432"
+    volumes:
+      # (Opțional, dar recomandat) Asigură persistența datelor
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4_container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: #email tau
+      PGADMIN_DEFAULT_PASSWORD: #parola ta
+    ports:
+      - "8070:80"
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+
+volumes:
+  postgres_data: {} # Declară volumul pentru persistență
+  pgadmin_data: {}
